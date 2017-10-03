@@ -15,16 +15,18 @@ Route::get('/', function () {
     return response()->json([]);
 });
 
-Route::get('query', function () {
+Route::get('query/', function () {
     abort(400);
 });
 
 Route::get('query/{id?}', function ($id) {
-    $client = new GuzzleHttp\Client();
-    $res = $client->get('http://api.tvmaze.com/search/shows?q=deadwood');
-    if ($res->getStatusCode() == 200) {
-        return response()->json(json_decode($res->getBody()));
-    } else {
-        abort(400);
+    if (gettype($id) == 'string') {
+        $client = new GuzzleHttp\Client();
+        $res = $client->get('http://api.tvmaze.com/search/shows?q=' . $id);
+        if ($res->getStatusCode() == 200) {
+            return response()->json(json_decode($res->getBody()));
+        }
     }
+    abort(400);
+
 });
