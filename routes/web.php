@@ -23,8 +23,15 @@ Route::get('query/{id?}', function ($id) {
     if (gettype($id) == 'string') {
         $client = new GuzzleHttp\Client();
         $res = $client->get('http://api.tvmaze.com/search/shows?q=' . $id);
+        $filtered = [];
         if ($res->getStatusCode() == 200) {
-            return response()->json(json_decode($res->getBody()));
+            $array = json_decode($res->getBody());
+            foreach ($array as $key => $value) {
+                if (strtolower ($value->show->name) == strtolower ($id)) {
+                    $filtered[] = array('title' => $value->show->name,'score' => $value->score);
+                }
+            }
+            return response()->json($filtered);
         }
     }
     abort(400);

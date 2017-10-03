@@ -25,11 +25,11 @@ class ExampleTest extends TestCase
         $response = $this->get('/query/deadwood');
 
         $response->assertStatus(200)->assertJson($response->json());
-        $response->assertStatus(200)->assertSeeText('deadwood')->assertSeeText('deadpool')->assertSeeText('Redwood Kings');
+        $response->assertStatus(200)->assertSeeText('deadwood')->assert;
 
         $response = $this->get('/query/sopranos');
 
         $response->assertStatus(200)->assertJson($response->json());
-        $response->assertStatus(200)->assertSeeText('The Sopranos')->assertSeeText('Sorans Krig');
+        $response->assertStatus(200)->assertSeeText('The Sopranos');
     }
 }
