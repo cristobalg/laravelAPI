@@ -20,16 +20,11 @@ Route::get('query', function () {
 });
 
 Route::get('query/{id?}', function ($id) {
-    if ($id=='deadwood') {
-        $client = new GuzzleHttp\Client();
-        $res = $client->get('http://api.tvmaze.com/search/shows?q=deadwood');
-        if ($res->getStatusCode() == 200) {
-            return response()->json(json_decode($res->getBody()));
-        } else {
-            abort(400);
-        }
+    $client = new GuzzleHttp\Client();
+    $res = $client->get('http://api.tvmaze.com/search/shows?q=deadwood');
+    if ($res->getStatusCode() == 200) {
+        return response()->json(json_decode($res->getBody()));
     } else {
-        return response()->json;
+        abort(400);
     }
-
 });
