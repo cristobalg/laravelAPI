@@ -25,9 +25,9 @@ class ExampleTest extends TestCase
         $response = $this->get('/query/deadwood');
 
         $response->assertStatus(200)->assertJson($response->json());
-        $response->assertStatus(200)->assertSeeText('deadwood')->assert;
+        $response->assertStatus(200)->assertSeeText('Deadwood');
 
-        $response = $this->get('/query/sopranos');
+        $response = $this->get('/query/The Sopranos');
 
         $response->assertStatus(200)->assertJson($response->json());
         $response->assertStatus(200)->assertSeeText('The Sopranos');
