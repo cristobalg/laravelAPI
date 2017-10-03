@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return response()->json([]);
 });
+
+Route::get('query', function () {
+    abort(400);
+});
+
+Route::get('query/{id?}', function ($id) {
+    return response()->json([]);
+});

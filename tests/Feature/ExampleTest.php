@@ -17,7 +17,12 @@ class ExampleTest extends TestCase
     public function testBasicTest()
     {
         $response = $this->get('/');
+        $response->assertStatus(200)->assertJson([]);
 
+        $response = $this->get('/query');
+        $response->assertStatus(400);
+
+        $response = $this->get('/query/deadwood');
         $response->assertStatus(200)->assertJson([]);
     }
 }
