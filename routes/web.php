@@ -27,7 +27,8 @@ Route::get('query/{id?}', function ($id) {
         if ($res->getStatusCode() == 200) {
             $array = json_decode($res->getBody());
             foreach ($array as $key => $value) {
-                if (strtolower ($value->show->name) == strtolower ($id)) {
+                $pos = strpos(strtolower($value->show->name), strtolower($id));
+                if ($pos !== false) {
                     $filtered[] = array('title' => $value->show->name,'score' => $value->score);
                 }
             }
@@ -35,5 +36,4 @@ Route::get('query/{id?}', function ($id) {
         }
     }
     abort(400);
-
 });
