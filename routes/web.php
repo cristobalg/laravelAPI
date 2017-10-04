@@ -12,14 +12,7 @@
 */
 
 Route::get('/', function () {
-    return response()->json([]);
-});
-
-Route::get('query/', function () {
-    abort(400);
-});
-
-Route::get('query/{id?}', function ($id) {
+    $id = request()->q;
     if (gettype($id) == 'string') {
         $client = new GuzzleHttp\Client();
         $res = $client->get('http://api.tvmaze.com/search/shows?q=' . $id);
@@ -36,4 +29,5 @@ Route::get('query/{id?}', function ($id) {
         }
     }
     abort(400);
+    return response()->json([]);
 });
