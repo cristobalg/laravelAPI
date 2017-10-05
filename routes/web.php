@@ -28,6 +28,5 @@ Route::get('/', function () {
             return response()->json($filtered);
         }
     }
-    abort(400);
     return response()->json([]);
 });

@@ -14,20 +14,18 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
+
     public function testBasicTest()
     {
         $response = $this->get('/');
         $response->assertStatus(200)->assertJson([]);
 
-        $response = $this->get('/query');
-        $response->assertStatus(400);
-
-        $response = $this->get('/query/deadwood');
+        $response = $this->get('/?q=deadwood');
 
         $response->assertStatus(200)->assertJson($response->json());
         $response->assertStatus(200)->assertSeeText('Deadwood');
 
-        $response = $this->get('/query/The Sopranos');
+        $response = $this->get('/?q=The Sopranos');
 
         $response->assertStatus(200)->assertJson($response->json());
         $response->assertStatus(200)->assertSeeText('The Sopranos');
