@@ -11,11 +11,14 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/api/v1', 'QueryController@query');
+
+/*
+Route::get('/git', function() {
     $id = request()->q;
     if (gettype($id) == 'string') {
         $client = new GuzzleHttp\Client();
-        $res = $client->get('http://api.tvmaze.com/search/shows?q=' . $id);
+        $res = $client->get('https://api.github.com/search/repositories?q=' . $id);
         $filtered = [];
         if ($res->getStatusCode() == 200) {
             $array = json_decode($res->getBody());
@@ -30,3 +33,4 @@ Route::get('/', function () {
     }
     return response()->json([]);
 });
+*/

@@ -22,3 +22,23 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Query::class, function (Faker\Generator $faker) {
+    return [
+        'provider' => 'git',
+        'query' => $faker->word,
+        'pagenum' => $faker->randomDigit,
+        'sort' => 'score',
+    ];
+});
+
+$factory->define(App\Result::class, function (Faker\Generator $faker) {
+    return [
+        'owner' => $faker->name,
+        'repository' => $faker->word,
+        'filename' => $faker->word . '.' . $faker->fileExtension,
+        'query_id' => function () {
+            return factory('App\Query')->create()->id;
+        },
+    ];
+});
